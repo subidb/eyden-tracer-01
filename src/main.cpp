@@ -8,7 +8,7 @@ Mat RenderFrame(ICamera& camera)
 {
 	// scene objects
 	
-	CPrimSphere s1(RGB(.5, 0, 0), Vec3f(-2, 1.7f, 0), 2);
+	CPrimSphere s1(RGB(.5, 0, 0), Vec3f(-2, 1.7f, 0), 2); //assigning position and color values to the constructor
 	CPrimSphere s2(RGB(0, 1, 0), Vec3f(1, -1, 1), 2.2f);
 	CPrimSphere s3(RGB(0, 0, 0.5), Vec3f(3, 0.8f, -2), 2);
 	CPrimPlane p1(RGB(0, .5, 1), Vec3f(0, -1, 0), Vec3f(0, 1, 0));
@@ -16,7 +16,7 @@ Mat RenderFrame(ICamera& camera)
 	CPrimTriangle t1(RGB(0.5, 1, 0.5), Vec3f(-2, 3.7f, 0), Vec3f(1, 2, 1), Vec3f(3, 2.8f, -2));
 	CPrimTriangle t2(RGB(0.5, 1, 0.5), Vec3f(3, 2, 3), Vec3f(3, 2, -3), Vec3f(-3, 2, -3));
 	
-	std::vector<CPrim*> objetcs = {&s1, &s2, &s3, &t1, &t2, &p1};
+	std::vector<CPrim*> objects = {&s1, &s2, &s3, &t1, &t2, &p1}; //defining a vector to store all the child objects
 
 	Mat img(camera.getResolution(), CV_32FC3); 	// image array
 	Ray ray;                            		// primary ray
@@ -35,13 +35,13 @@ Mat RenderFrame(ICamera& camera)
 			
 			/*
 			 * Find closest intersection with scene
-			 * objetcs and calculate color
+			 * objects and calculate color
 			 */
 			
 			// Your code
-			for(auto object : objetcs){
+			for(auto object : objects){
 				if (object->Intersect(ray)){
-					col = object->getcolor();
+					col = object->getcolor(); //if object intersects with the ray, extract the respecrtive pixel color
 				}
 			}
 
