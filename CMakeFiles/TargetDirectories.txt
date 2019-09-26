@@ -1,0 +1,3 @@
+/home/subid/Desktop/Sem3/ComputerGraphics/eyden-tracer-01/CMakeFiles/rebuild_cache.dir
+/home/subid/Desktop/Sem3/ComputerGraphics/eyden-tracer-01/CMakeFiles/eyden-tracer.dir
+/home/subid/Desktop/Sem3/ComputerGraphics/eyden-tracer-01/CMakeFiles/edit_cache.dir

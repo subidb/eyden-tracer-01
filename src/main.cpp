@@ -8,14 +8,16 @@ Mat RenderFrame(ICamera& camera)
 {
 	// scene objects
 	
-	CPrimSphere s1(Vec3f(-2, 1.7f, 0), 2);
-	CPrimSphere s2(Vec3f(1, -1, 1), 2.2f);
-	CPrimSphere s3(Vec3f(3, 0.8f, -2), 2);
-	CPrimPlane p1(Vec3f(0, -1, 0), Vec3f(0, 1, 0));
+	CPrimSphere s1(RGB(.5, 0, 0), Vec3f(-2, 1.7f, 0), 2);
+	CPrimSphere s2(RGB(0, 1, 0), Vec3f(1, -1, 1), 2.2f);
+	CPrimSphere s3(RGB(0, 0, 0.5), Vec3f(3, 0.8f, -2), 2);
+	CPrimPlane p1(RGB(0, .5, 1), Vec3f(0, -1, 0), Vec3f(0, 1, 0));
 	
-	CPrimTriangle t1(Vec3f(-2, 3.7f, 0), Vec3f(1, 2, 1), Vec3f(3, 2.8f, -2));
-	CPrimTriangle t2(Vec3f(3, 2, 3), Vec3f(3, 2, -3), Vec3f(-3, 2, -3));
+	CPrimTriangle t1(RGB(0.5, 1, 0.5), Vec3f(-2, 3.7f, 0), Vec3f(1, 2, 1), Vec3f(3, 2.8f, -2));
+	CPrimTriangle t2(RGB(0.5, 1, 0.5), Vec3f(3, 2, 3), Vec3f(3, 2, -3), Vec3f(-3, 2, -3));
 	
+	std::vector<CPrim*> objetcs = {&s1, &s2, &s3, &t1, &t2, &p1};
+
 	Mat img(camera.getResolution(), CV_32FC3); 	// image array
 	Ray ray;                            		// primary ray
 	
@@ -23,6 +25,9 @@ Mat RenderFrame(ICamera& camera)
 		for (int x = 0; x < img.cols; x++) {
 			
 			// Initialize your ray here
+			if (!camera.InitRay(x, y, ray)){
+				continue;
+			}
 			
 			// Your code
 			
@@ -34,6 +39,12 @@ Mat RenderFrame(ICamera& camera)
 			 */
 			
 			// Your code
+			for(auto object : objetcs){
+				if (object->Intersect(ray)){
+					col = object->getcolor();
+				}
+			}
+
 			
 			img.at<Vec3f>(y, x) = col; // store pixel color
 		}

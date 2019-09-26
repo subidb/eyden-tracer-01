@@ -13,7 +13,9 @@ public:
 	/**
 	* @brief Constructor
 	*/
+	CPrim(Vec3f color) : m_color(color){};
 	CPrim(void) = default;
+
 	CPrim(const CPrim&) = delete;
 	virtual ~CPrim(void) = default;
 	const CPrim& operator=(const CPrim&) = delete;
@@ -26,4 +28,11 @@ public:
 	 * @retval false Otherwise
 	 */
 	virtual bool	Intersect(Ray& ray) = 0;
+	Vec3f getcolor(){ 
+		return m_color;
+	}
+
+private:
+	Vec3f m_color;
+
 };

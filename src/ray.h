@@ -1,5 +1,3 @@
-// Basic ray structure
-// Written by Sergey Kosov in 2005 for Rendering Competition
 #pragma once
 
 #include "types.h"
